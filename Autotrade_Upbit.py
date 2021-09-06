@@ -4,6 +4,7 @@ import datetime
 import schedule
 from fbprophet import Prophet
 
+#계정 액세스키, 시크릿키 입력
 access = ""
 secret = ""
 
