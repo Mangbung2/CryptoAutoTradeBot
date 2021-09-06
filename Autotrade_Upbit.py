@@ -4,17 +4,23 @@ import datetime
 import schedule
 from fbprophet import Prophet
 
-access = "your-access"
-secret = "your-secret"
+access = ""
+secret = ""
 
 def get_target_price(ticker, k):
-    """변동성 돌파 전략으로 매수 목표가 조회"""
+    """
+    변동성 돌파 전략으로 매수 목표가 조회
+    전날 변동성 < 오늘 변동성 => 매수
+    """
     df = pyupbit.get_ohlcv(ticker, interval="day", count=2)
     target_price = df.iloc[0]['close'] + (df.iloc[0]['high'] - df.iloc[0]['low']) * k
     return target_price
 
 def get_start_time(ticker):
-    """시작 시간 조회"""
+    """
+    시작 시간 조회
+    9시
+    """
     df = pyupbit.get_ohlcv(ticker, interval="day", count=1)
     start_time = df.index[0]
     return start_time
